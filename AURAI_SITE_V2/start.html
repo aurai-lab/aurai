@@ -1,0 +1,1245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Start Your Project · AURAI LAB</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --milk: #F8F5F0;
+    --milk-2: #FFFDFC;
+    --ink: #312D3A;
+    --muted: #8F8698;
+    --lavender: #BBA0D0;
+    --future-blue: #A8C7E3;
+    --rose-gold: #E7B6A6;
+    --pearl: rgba(255,255,255,0.72);
+    --card: rgba(255,255,255,0.58);
+    --card-strong: rgba(255,255,255,0.78);
+    --border: rgba(187,160,208,0.26);
+    --border-strong: rgba(187,160,208,0.44);
+    --shadow: 0 28px 90px rgba(96, 77, 118, 0.13);
+    --glow: 0 0 42px rgba(187,160,208,0.18);
+    --font-display: 'Cormorant Garamond', Georgia, serif;
+    --font-body: 'DM Sans', system-ui, sans-serif;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background:
+      radial-gradient(circle at 12% 12%, rgba(187,160,208,0.20), transparent 30%),
+      radial-gradient(circle at 88% 18%, rgba(168,199,227,0.20), transparent 34%),
+      radial-gradient(circle at 55% 78%, rgba(231,182,166,0.18), transparent 34%),
+      linear-gradient(145deg, #FBF8F3 0%, #F7F2F4 45%, #F4F7F8 100%);
+    color: var(--ink);
+    font-family: var(--font-body);
+    font-size: 15px;
+    font-weight: 300;
+    line-height: 1.6;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+    background:
+      linear-gradient(90deg, rgba(187,160,208,0.06) 1px, transparent 1px),
+      linear-gradient(rgba(168,199,227,0.045) 1px, transparent 1px);
+    background-size: 120px 120px;
+    mask-image: radial-gradient(circle at 50% 35%, black, transparent 76%);
+    opacity: 0.55;
+  }
+
+  .stars {
+    position: fixed; inset: 0; pointer-events: none; z-index: 0;
+    background:
+      radial-gradient(1.2px 1.2px at 10% 15%, rgba(187,160,208,0.35) 0%, transparent 100%),
+      radial-gradient(1px 1px at 25% 60%, rgba(168,199,227,0.38) 0%, transparent 100%),
+      radial-gradient(1.2px 1.2px at 40% 30%, rgba(231,182,166,0.34) 0%, transparent 100%),
+      radial-gradient(1px 1px at 60% 80%, rgba(187,160,208,0.28) 0%, transparent 100%),
+      radial-gradient(1.4px 1.4px at 75% 20%, rgba(168,199,227,0.34) 0%, transparent 100%),
+      radial-gradient(1px 1px at 85% 55%, rgba(231,182,166,0.28) 0%, transparent 100%),
+      radial-gradient(1px 1px at 15% 85%, rgba(187,160,208,0.24) 0%, transparent 100%);
+    animation: starBreath 7s ease-in-out infinite alternate;
+  }
+
+  @keyframes starBreath {
+    from { opacity: 0.45; }
+    to { opacity: 0.82; }
+  }
+
+  .nebula {
+    position: fixed; inset: 0; pointer-events: none; z-index: 0;
+    background:
+      radial-gradient(ellipse 42% 32% at 20% 78%, rgba(187,160,208,0.12) 0%, transparent 72%),
+      radial-gradient(ellipse 48% 38% at 82% 22%, rgba(231,182,166,0.10) 0%, transparent 72%),
+      radial-gradient(ellipse 64% 34% at 50% 50%, rgba(168,199,227,0.10) 0%, transparent 76%);
+    filter: blur(1px);
+  }
+
+  .wrapper {
+    position: relative; z-index: 1;
+    width: min(680px, calc(100% - 36px));
+    margin: 0 auto;
+    padding: 72px 0 110px;
+  }
+
+  .progress-bar {
+    position: fixed; top: 0; left: 0;
+    height: 2px;
+    background: linear-gradient(90deg, var(--lavender), var(--rose-gold), var(--future-blue));
+    transition: width 0.55s cubic-bezier(0.4,0,0.2,1);
+    z-index: 100;
+    box-shadow: 0 0 14px rgba(187,160,208,0.42);
+  }
+
+  .step-counter {
+    position: fixed; top: 22px; right: 28px;
+    font-size: 11px;
+    letter-spacing: 0.16em;
+    color: rgba(49,45,58,0.38);
+    z-index: 100;
+    text-transform: uppercase;
+  }
+
+  .shell {
+    background: linear-gradient(145deg, rgba(255,255,255,0.72), rgba(255,255,255,0.45));
+    border: 1px solid rgba(255,255,255,0.72);
+    border-radius: 36px;
+    box-shadow: var(--shadow), inset 0 0 0 1px rgba(187,160,208,0.12);
+    backdrop-filter: blur(22px);
+    -webkit-backdrop-filter: blur(22px);
+    overflow: hidden;
+  }
+
+  .brand-bar {
+    padding: 32px 34px 28px;
+    border-bottom: 1px solid rgba(187,160,208,0.14);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .brand {
+    font-family: var(--font-display);
+    letter-spacing: 0.24em;
+    font-size: 28px;
+    color: rgba(49,45,58,0.82);
+  }
+
+  .signal-mark {
+    color: var(--lavender);
+    font-size: 18px;
+    filter: drop-shadow(0 0 12px rgba(187,160,208,0.42));
+  }
+
+  .inner { padding: 56px 34px 42px; }
+
+  .intro {
+    text-align: center;
+    padding: 16px 0 36px;
+    animation: fadeUp 0.9s ease both;
+  }
+
+  .intro-symbol {
+    font-size: 26px;
+    margin-bottom: 30px;
+    opacity: 0.86;
+    display: block;
+    color: var(--lavender);
+  }
+
+  .intro h1 {
+    font-family: var(--font-display);
+    font-weight: 300;
+    font-size: clamp(52px, 10vw, 82px);
+    line-height: 0.98;
+    letter-spacing: -0.035em;
+    margin-bottom: 26px;
+    color: var(--ink);
+  }
+
+  .intro-sub {
+    font-size: clamp(15px, 2.8vw, 18px);
+    color: rgba(49,45,58,0.58);
+    letter-spacing: 0.01em;
+    max-width: 460px;
+    margin: 0 auto 18px;
+    line-height: 1.78;
+  }
+
+  .intro-time {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: rgba(49,45,58,0.36);
+    margin-top: 8px;
+  }
+
+  .intro-time::before, .intro-time::after { content: '—'; opacity: 0.5; }
+
+  .step { display: none; animation: fadeUp 0.45s ease both; }
+  .step.active { display: block; }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(18px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  .q-kicker {
+    font-size: 12px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: rgba(49,45,58,0.34);
+    margin-bottom: 22px;
+  }
+
+  .q-label {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    margin-bottom: 34px;
+  }
+
+  .q-emoji {
+    font-size: 20px;
+    flex-shrink: 0;
+    transform: translateY(6px);
+    color: var(--lavender);
+    text-shadow: 0 0 16px rgba(187,160,208,0.35);
+  }
+
+  .q-text {
+    font-family: var(--font-display);
+    font-weight: 300;
+    font-size: clamp(34px, 7vw, 56px);
+    line-height: 1.02;
+    letter-spacing: -0.035em;
+    color: var(--ink);
+  }
+
+  .q-sub {
+    font-size: 15px;
+    color: rgba(49,45,58,0.54);
+    margin-top: 18px;
+    font-style: italic;
+    letter-spacing: 0.02em;
+    line-height: 1.7;
+  }
+
+  .options {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .option {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 18px 20px;
+    background: rgba(255,255,255,0.48);
+    border: 1px solid rgba(187,160,208,0.18);
+    border-radius: 22px;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    position: relative;
+    overflow: hidden;
+    min-height: 62px;
+  }
+
+  .option::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: linear-gradient(135deg, rgba(187,160,208,0.13), rgba(231,182,166,0.10), rgba(168,199,227,0.10));
+    opacity: 0;
+    transition: opacity 0.25s ease;
+  }
+
+  .option:hover::before { opacity: 1; }
+  .option:hover {
+    border-color: rgba(187,160,208,0.42);
+    transform: translateX(4px);
+    box-shadow: 0 12px 34px rgba(96,77,118,0.08);
+  }
+
+  .option.selected {
+    border-color: rgba(187,160,208,0.58);
+    background: rgba(255,255,255,0.76);
+    box-shadow: var(--glow);
+  }
+
+  .option-dot {
+    width: 15px; height: 15px;
+    border: 1px solid rgba(49,45,58,0.22);
+    border-radius: 50%;
+    flex-shrink: 0;
+    position: relative;
+    transition: all 0.25s ease;
+    z-index: 1;
+  }
+
+  .option.selected .option-dot {
+    border-color: var(--lavender);
+    background: linear-gradient(135deg, var(--lavender), var(--future-blue));
+    box-shadow: 0 0 14px rgba(187,160,208,0.42);
+  }
+
+  .option-dot::after {
+    content: '';
+    position: absolute;
+    inset: 4px;
+    border-radius: 50%;
+    background: white;
+    transform: scale(0);
+    transition: transform 0.2s ease;
+  }
+
+  .option.selected .option-dot::after { transform: scale(1); }
+
+  .option-label {
+    position: relative;
+    z-index: 1;
+    font-size: 15px;
+    letter-spacing: 0.02em;
+    color: rgba(49,45,58,0.74);
+    transition: color 0.2s ease;
+  }
+
+  .option.selected .option-label { color: var(--ink); }
+
+  .option-tag {
+    position: relative;
+    z-index: 1;
+    margin-left: auto;
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: rgba(187,160,208,0.72);
+  }
+
+  textarea, .link-input {
+    width: 100%;
+    background: rgba(255,255,255,0.54);
+    border: 1px solid rgba(187,160,208,0.22);
+    border-radius: 24px;
+    color: var(--ink);
+    font-family: var(--font-body);
+    font-size: 16px;
+    font-weight: 300;
+    line-height: 1.75;
+    padding: 24px;
+    outline: none;
+    transition: border-color 0.25s ease, background 0.25s ease, box-shadow 0.25s ease;
+    letter-spacing: 0.01em;
+  }
+
+  textarea {
+    min-height: 178px;
+    resize: vertical;
+  }
+
+  textarea::placeholder, .link-input::placeholder {
+    color: rgba(49,45,58,0.34);
+    font-style: italic;
+  }
+
+  textarea:focus, .link-input:focus {
+    border-color: rgba(187,160,208,0.58);
+    background: rgba(255,255,255,0.78);
+    box-shadow: 0 0 0 4px rgba(187,160,208,0.10);
+  }
+
+  .link-input {
+    margin-top: 22px;
+    border-radius: 999px;
+    padding: 18px 22px;
+  }
+
+  .divider {
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(187,160,208,0.30), transparent);
+    margin: 50px 0;
+  }
+
+  .nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 46px;
+    gap: 16px;
+  }
+
+  button { -webkit-tap-highlight-color: transparent; }
+
+  .btn-back {
+    background: none;
+    border: none;
+    color: rgba(49,45,58,0.42);
+    font-family: var(--font-body);
+    font-size: 12px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    cursor: pointer;
+    padding: 12px 0;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s ease;
+  }
+
+  .btn-back:hover { color: rgba(49,45,58,0.72); }
+  .btn-back:disabled { opacity: 0; pointer-events: none; }
+
+  .btn-next {
+    background: rgba(255,255,255,0.42);
+    border: 1px solid rgba(187,160,208,0.26);
+    color: var(--ink);
+    font-family: var(--font-body);
+    font-size: 12px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    cursor: pointer;
+    padding: 16px 30px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    border-radius: 999px;
+  }
+
+  .btn-next::before, .btn-submit::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: linear-gradient(135deg, rgba(187,160,208,0.12), rgba(231,182,166,0.10), rgba(168,199,227,0.10));
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+
+  .btn-next:hover::before, .btn-submit:hover::before { opacity: 1; }
+  .btn-next:hover {
+    border-color: rgba(187,160,208,0.48);
+    box-shadow: 0 10px 26px rgba(96,77,118,0.10);
+  }
+
+  .btn-next.skip {
+    color: rgba(49,45,58,0.42);
+    border-color: transparent;
+    background: transparent;
+    padding: 16px 8px;
+  }
+
+  .btn-submit {
+    width: 100%;
+    background: rgba(255,255,255,0.58);
+    border: 1px solid rgba(187,160,208,0.34);
+    color: var(--ink);
+    font-family: var(--font-display);
+    font-size: clamp(22px, 4vw, 30px);
+    font-weight: 300;
+    font-style: italic;
+    letter-spacing: 0.025em;
+    cursor: pointer;
+    padding: 26px 34px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 14px;
+    transition: all 0.35s ease;
+    position: relative;
+    overflow: hidden;
+    border-radius: 999px;
+    margin-top: 44px;
+    box-shadow: 0 18px 46px rgba(96,77,118,0.08);
+  }
+
+  .btn-submit:hover {
+    border-color: rgba(187,160,208,0.62);
+    box-shadow: 0 20px 54px rgba(96,77,118,0.14), inset 0 0 40px rgba(187,160,208,0.06);
+    transform: translateY(-1px);
+  }
+
+  .btn-submit span, .btn-next span { position: relative; z-index: 1; }
+
+  .thankyou {
+    display: none;
+    text-align: center;
+    padding: 48px 0 36px;
+    animation: fadeUp 0.8s ease both;
+  }
+
+  .thankyou.active { display: block; }
+
+  .thankyou-symbol {
+    color: var(--lavender);
+    font-size: 44px;
+    margin-bottom: 36px;
+    display: block;
+    animation: float 3s ease-in-out infinite;
+  }
+
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-8px); }
+  }
+
+  .thankyou h2 {
+    font-family: var(--font-display);
+    font-weight: 300;
+    font-size: clamp(42px, 8vw, 68px);
+    line-height: 1.06;
+    margin-bottom: 24px;
+    color: var(--ink);
+  }
+
+  .thankyou p {
+    color: rgba(49,45,58,0.56);
+    font-size: 16px;
+    max-width: 420px;
+    margin: 0 auto;
+    line-height: 1.85;
+  }
+
+  .thankyou-divider {
+    width: 64px; height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(187,160,208,0.48), transparent);
+    margin: 32px auto;
+  }
+
+  .chaos-tag {
+    position: relative;
+    z-index: 1;
+    display: inline-flex;
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: rgba(231,182,166,0.88);
+    margin-left: auto;
+  }
+
+
+  .send-choices {
+    margin-top: 22px;
+    display: grid;
+    gap: 12px;
+    animation: fadeUp 0.35s ease both;
+  }
+
+  .send-choice {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    text-align: left;
+    padding: 18px 20px;
+    border-radius: 22px;
+    border: 1px solid rgba(187,160,208,0.22);
+    background: rgba(255,255,255,0.52);
+    color: var(--ink);
+    cursor: pointer;
+    transition: all 0.25s ease;
+    font-family: var(--font-body);
+  }
+
+  .send-choice:hover {
+    transform: translateX(4px);
+    border-color: rgba(187,160,208,0.50);
+    box-shadow: 0 14px 36px rgba(96,77,118,0.10);
+    background: rgba(255,255,255,0.76);
+  }
+
+  .send-choice.ghost {
+    opacity: 0.78;
+  }
+
+  .send-choice-mark {
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, rgba(187,160,208,0.22), rgba(231,182,166,0.18), rgba(168,199,227,0.18));
+    color: var(--ink);
+    flex-shrink: 0;
+  }
+
+  .send-choice strong {
+    display: block;
+    font-size: 14px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    font-weight: 500;
+  }
+
+  .send-choice em {
+    display: block;
+    margin-top: 4px;
+    font-size: 12px;
+    color: rgba(49,45,58,0.46);
+    font-style: italic;
+  }
+
+
+  .back-home {
+    position: fixed;
+    left: 22px;
+    top: 22px;
+    z-index: 120;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 16px;
+    border-radius: 999px;
+    text-decoration: none;
+    color: rgba(49,45,58,0.62);
+    background: rgba(255,255,255,0.62);
+    border: 1px solid rgba(187,160,208,0.22);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    font-family: var(--font-body);
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    box-shadow: 0 12px 34px rgba(96,77,118,0.08);
+    transition: all .25s ease;
+  }
+  .back-home:hover {
+    color: var(--ink);
+    border-color: rgba(187,160,208,0.44);
+    transform: translateX(-2px);
+  }
+  @media (max-width: 600px) {
+    .back-home {
+      left: 14px;
+      top: 14px;
+      padding: 10px 13px;
+      font-size: 10px;
+      background: rgba(255,255,255,0.78);
+    }
+  }
+
+  @media (pointer: fine) {
+    body { cursor: auto; }
+
+    .cursor {
+      position: fixed;
+      width: 7px; height: 7px;
+      background: rgba(187,160,208,0.86);
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 9999;
+      transform: translate(-50%, -50%);
+      transition: width 0.2s ease, height 0.2s ease, background 0.2s ease;
+      mix-blend-mode: multiply;
+    }
+
+    .cursor-ring {
+      position: fixed;
+      width: 30px; height: 30px;
+      border: 1px solid rgba(187,160,208,0.32);
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 9998;
+      transform: translate(-50%, -50%);
+      transition: width 0.3s ease, height 0.3s ease, opacity 0.3s ease;
+    }
+  }
+
+  @media (max-width: 600px) {
+    .wrapper { width: min(100% - 22px, 680px); padding: 52px 0 90px; }
+    .brand-bar { padding: 26px 24px 22px; }
+    .brand { font-size: 24px; }
+    .inner { padding: 48px 24px 34px; }
+    .intro h1 { font-size: 58px; }
+    .q-text { font-size: 37px; }
+    .q-label { gap: 12px; }
+    .option { padding: 17px 18px; border-radius: 20px; }
+    .nav { margin-top: 38px; }
+    .btn-next { padding: 15px 22px; }
+    .step-counter { top: 18px; right: 18px; }
+  }
+</style>
+
+<style data-inline-from="AURAI_V20_CURSOR_FIX">
+.cursor,
+.cursor-ring{
+  display:none!important;
+}
+body, body *{
+  cursor:auto!important;
+}
+button, a, .option, input, textarea{
+  cursor:pointer!important;
+}
+input, textarea{
+  cursor:text!important;
+}
+</style>
+
+
+<style data-inline-from="AURAI_V21_CURSOR_FIX">
+.cursor,.cursor-ring{display:none!important}
+body,body *{cursor:auto!important}
+button,a,.option{cursor:pointer!important}
+input,textarea{cursor:text!important}
+</style>
+
+
+<style data-inline-from="AURAI_V23_SELECTED_SERVICE_CSS">
+.selected-service-note{
+  width:fit-content;
+  max-width:100%;
+  margin:22px auto 0;
+  padding:10px 15px;
+  border-radius:999px;
+  background:linear-gradient(135deg,rgba(250,220,229,.72),rgba(230,224,240,.58),rgba(216,223,229,.48));
+  border:1px solid rgba(187,160,208,.26);
+  color:#312D3A;
+  font-size:12px;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+}
+</style>
+
+</head>
+<body>
+
+<a class="back-home" href="index.html">← AURAI</a>
+<div class="stars"></div>
+<div class="nebula"></div>
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
+<div class="progress-bar" id="progressBar"></div>
+<div class="step-counter" id="stepCounter"></div>
+
+<div class="wrapper">
+  <div class="shell">
+    <div class="brand-bar">
+      <div class="brand">AURAI</div>
+      <div class="signal-mark">✦</div>
+    </div>
+
+    <div class="inner">
+      <div class="intro" id="intro">
+        <span class="intro-symbol">✦</span>
+        <h1>Start Your<br/>Project</h1>
+        <p class="intro-sub">Every great product begins with a conversation. Tell us a little about what you're building.</p>
+        <span class="intro-time">about 2 minutes</span>
+        <div id="selectedServiceNote" class="selected-service-note" style="display:none;"></div>
+        <div id="selectedProjectNote" class="selected-service-note" style="display:none;"></div>
+        <div class="divider"></div>
+        <button class="btn-submit" id="startBtn" style="font-size:15px; padding:20px 40px; font-style:normal; letter-spacing:0.12em; font-family: var(--font-body);" data-aurai-begin="true" type="button" onclick="startJourney()">
+          <span>Begin ✦</span>
+        </button>
+      </div>
+
+      <div class="step" id="step-1">
+        <div class="q-kicker">01 · Project</div>
+        <div class="q-label"><span class="q-emoji">✦</span><div><div class="q-text">What would you like us to build?</div></div></div>
+        <div class="options">
+          <div class="option" onclick="selectOption(this, 1)"><div class="option-dot"></div><span class="option-label">A Brand</span></div>
+          <div class="option" onclick="selectOption(this, 1)"><div class="option-dot"></div><span class="option-label">A Website</span></div>
+          <div class="option" onclick="selectOption(this, 1)"><div class="option-dot"></div><span class="option-label">A Digital Product</span></div>
+          <div class="option" onclick="selectOption(this, 1)"><div class="option-dot"></div><span class="option-label">An Internal System</span></div>
+          <div class="option" onclick="selectOption(this, 1)"><div class="option-dot"></div><span class="option-label">Not Sure Yet</span><span class="option-tag">we'll find it</span></div>
+        </div>
+        <div class="nav"><button class="btn-back" disabled onclick="prevStep()">← Back</button><button class="btn-next" onclick="nextStep(1)"><span>Continue →</span></button></div>
+      </div>
+
+
+      <div class="step" id="step-2">
+        <div class="q-kicker">02 · Let's Meet</div>
+        <div class="q-label"><span class="q-emoji">✦</span><div><div class="q-text">Before we continue...</div><div class="q-sub">What's your name?</div></div></div>
+        <input class="link-input" id="clientName" placeholder="Your Name ✦" style="margin-top:0;">
+        <input class="link-input" id="companyName" placeholder="Company or Brand Name (optional) ✦">
+        <div class="nav"><button class="btn-back" onclick="prevStep()">← Back</button><button class="btn-next" onclick="nextStep(2)"><span>Continue →</span></button></div>
+      </div>
+
+      <div class="step" id="step-3">
+        <div class="q-kicker">03 · Who Are You?</div>
+        <div class="q-label"><span class="q-emoji">✦</span><div><div class="q-text">Tell us about yourself.</div></div></div>
+        <div class="options">
+          <div class="option" onclick="selectOption(this, 3)"><div class="option-dot"></div><span class="option-label">Founder / Startup</span></div>
+          <div class="option" onclick="selectOption(this, 3)"><div class="option-dot"></div><span class="option-label">Personal Brand</span></div>
+          <div class="option" onclick="selectOption(this, 3)"><div class="option-dot"></div><span class="option-label">Business Owner</span></div>
+          <div class="option" onclick="selectOption(this, 3)"><div class="option-dot"></div><span class="option-label">Product Team</span></div>
+          <div class="option" onclick="selectOption(this, 3)"><div class="option-dot"></div><span class="option-label">Something Else</span></div>
+        </div>
+        <div class="nav"><button class="btn-back" onclick="prevStep()">← Back</button><button class="btn-next" onclick="nextStep(3)"><span>Continue →</span></button></div>
+      </div>
+
+      <div class="step" id="step-4">
+        <div class="q-kicker">04 · Industry</div>
+        <div class="q-label"><span class="q-emoji">✦</span><div><div class="q-text">What industry are you in?</div></div></div>
+        <div class="options">
+          <div class="option" onclick="selectOption(this, 4)"><div class="option-dot"></div><span class="option-label">AI / Technology</span></div>
+          <div class="option" onclick="selectOption(this, 4)"><div class="option-dot"></div><span class="option-label">Beauty & Wellness</span></div>
+          <div class="option" onclick="selectOption(this, 4)"><div class="option-dot"></div><span class="option-label">Fashion</span></div>
+          <div class="option" onclick="selectOption(this, 4)"><div class="option-dot"></div><span class="option-label">Media & Content</span></div>
+          <div class="option" onclick="selectOption(this, 4)"><div class="option-dot"></div><span class="option-label">Education</span></div>
+          <div class="option" onclick="selectOption(this, 4)"><div class="option-dot"></div><span class="option-label">Professional Services</span></div>
+          <div class="option" onclick="selectOption(this, 4)"><div class="option-dot"></div><span class="option-label">Hospitality</span></div>
+          <div class="option" onclick="selectOption(this, 4)"><div class="option-dot"></div><span class="option-label">Other</span></div>
+        </div>
+        <div class="nav"><button class="btn-back" onclick="prevStep()">← Back</button><button class="btn-next" onclick="nextStep(4)"><span>Continue →</span></button></div>
+      </div>
+
+      <div class="step" id="step-5">
+        <div class="q-kicker">05 · Vision</div>
+        <div class="q-label"><span class="q-emoji">✦</span><div><div class="q-text">If everything worked perfectly, what would exist in 3 months?</div><div class="q-sub">One paragraph is enough. Messy is welcome.</div></div></div>
+        <textarea id="vision" placeholder="Example: We'd have a premium brand, website and product that people trust immediately..."></textarea>
+        <div class="nav"><button class="btn-back" onclick="prevStep()">← Back</button><div style="display:flex; gap:12px; align-items:center;"><button class="btn-next skip" onclick="nextStep(5)">Skip</button><button class="btn-next" onclick="nextStep(5)"><span>Continue →</span></button></div></div>
+      </div>
+
+      <div class="step" id="step-6">
+        <div class="q-kicker">06 · Style</div>
+        <div class="q-label"><span class="q-emoji">✦</span><div><div class="q-text">What feels closest to your vision?</div><div class="q-sub">Aesthetic direction helps us choose the right language faster.</div></div></div>
+        <div class="options">
+          <div class="option" onclick="selectOption(this, 6)"><div class="option-dot"></div><span class="option-label">Clean & Minimal</span></div>
+          <div class="option" onclick="selectOption(this, 6)"><div class="option-dot"></div><span class="option-label">Quiet Luxury</span></div>
+          <div class="option" onclick="selectOption(this, 6)"><div class="option-dot"></div><span class="option-label">Future & Technology</span></div>
+          <div class="option" onclick="selectOption(this, 6)"><div class="option-dot"></div><span class="option-label">Human & Emotional</span></div>
+          <div class="option" onclick="selectOption(this, 6)"><div class="option-dot"></div><span class="option-label">Bold & Experimental</span></div>
+          <div class="option" onclick="selectOption(this, 6)"><div class="option-dot"></div><span class="option-label">Not Sure Yet</span><span class="option-tag">we'll shape it</span></div>
+        </div>
+        <div class="nav"><button class="btn-back" onclick="prevStep()">← Back</button><button class="btn-next" onclick="nextStep(6)"><span>Continue →</span></button></div>
+      </div>
+
+      <div class="step" id="step-7">
+        <div class="q-kicker">07 · Challenge</div>
+        <div class="q-label"><span class="q-emoji">✦</span><div><div class="q-text">What is the biggest challenge right now?</div></div></div>
+        <div class="options">
+          <div class="option" onclick="selectOption(this, 7)"><div class="option-dot"></div><span class="option-label">No Brand</span></div>
+          <div class="option" onclick="selectOption(this, 7)"><div class="option-dot"></div><span class="option-label">No Website</span></div>
+          <div class="option" onclick="selectOption(this, 7)"><div class="option-dot"></div><span class="option-label">No Product</span></div>
+          <div class="option" onclick="selectOption(this, 7)"><div class="option-dot"></div><span class="option-label">Too Much Manual Work</span></div>
+          <div class="option" onclick="selectOption(this, 7)"><div class="option-dot"></div><span class="option-label">Everything Feels Chaotic</span><span class="chaos-tag">same</span></div>
+          <div class="option" onclick="selectOption(this, 7)"><div class="option-dot"></div><span class="option-label">Something Else</span></div>
+        </div>
+        <div class="nav"><button class="btn-back" onclick="prevStep()">← Back</button><button class="btn-next" onclick="nextStep(7)"><span>Continue →</span></button></div>
+      </div>
+
+      <div class="step" id="step-8">
+        <div class="q-kicker">08 · Timeline</div>
+        <div class="q-label"><span class="q-emoji">✦</span><div><div class="q-text">When would you like this to exist?</div></div></div>
+        <div class="options">
+          <div class="option" onclick="selectOption(this, 8)"><div class="option-dot"></div><span class="option-label">Within 1 Week</span></div>
+          <div class="option" onclick="selectOption(this, 8)"><div class="option-dot"></div><span class="option-label">Within 2 Weeks</span></div>
+          <div class="option" onclick="selectOption(this, 8)"><div class="option-dot"></div><span class="option-label">Within 1 Month</span></div>
+          <div class="option" onclick="selectOption(this, 8)"><div class="option-dot"></div><span class="option-label">Within 3 Months</span></div>
+          <div class="option" onclick="selectOption(this, 8)"><div class="option-dot"></div><span class="option-label">Just Exploring</span><span class="option-tag">still valid</span></div>
+        </div>
+        <div class="nav"><button class="btn-back" onclick="prevStep()">← Back</button><button class="btn-next" onclick="nextStep(8)"><span>Continue →</span></button></div>
+      </div>
+
+      <div class="step" id="step-9">
+        <div class="q-kicker">09 · Investment</div>
+        <div class="q-label"><span class="q-emoji">✦</span><div><div class="q-text">What level of investment feels right?</div><div class="q-sub">This helps us suggest the right shape of collaboration.</div></div></div>
+        <div class="options">
+          <div class="option" onclick="selectOption(this, 9)"><div class="option-dot"></div><span class="option-label">Just Starting</span></div>
+          <div class="option" onclick="selectOption(this, 9)"><div class="option-dot"></div><span class="option-label">Growth Stage</span></div>
+          <div class="option" onclick="selectOption(this, 9)"><div class="option-dot"></div><span class="option-label">Ready To Invest</span></div>
+          <div class="option" onclick="selectOption(this, 9)"><div class="option-dot"></div><span class="option-label">Let's Build Something Ambitious</span></div>
+        </div>
+        <div class="nav"><button class="btn-back" onclick="prevStep()">← Back</button><button class="btn-next" onclick="nextStep(9)"><span>Continue →</span></button></div>
+      </div>
+
+      <div class="step" id="step-10">
+        <div class="q-kicker">10 · One Last Thing</div>
+        <div class="q-label"><span class="q-emoji">✦</span><div><div class="q-text">If AURAI could solve only one thing for you, what would it be?</div><div class="q-sub">The answer can be emotional, practical, strategic or chaotic. We like truth.</div></div></div>
+        <textarea id="oneThing" placeholder="Example: We need to look premium enough to charge more. / We need a website that makes people trust us. / We need to stop doing reports manually..." style="min-height: 142px;"></textarea>
+        <input class="link-input" placeholder="Your email / Telegram / WeChat ✦" id="contactInfo" />
+        <button class="btn-submit" onclick="showSendChoices()"><span>Send The Signal ✦</span></button>
+
+        <div id="sendChoices" class="send-choices" style="display:none;">
+          <button class="send-choice" onclick="sendByEmail()">
+            <span class="send-choice-mark">✉</span>
+            <span>
+              <strong>Send by Email</strong>
+              <em>opens a beautifully formatted email</em>
+            </span>
+          </button>
+
+          <button class="send-choice" onclick="sendByTelegram()">
+            <span class="send-choice-mark">◈</span>
+            <span>
+              <strong>Send via Telegram</strong>
+              <em>copies the brief and opens Telegram chat @Sofiya_aurai</em>
+            </span>
+          </button>
+
+          <button class="send-choice ghost" onclick="copyBrief()">
+            <span class="send-choice-mark">✦</span>
+            <span>
+              <strong>Copy Brief</strong>
+              <em>backup if apps do not open</em>
+            </span>
+          </button>
+        </div>
+
+        <div style="text-align:center; margin-top:18px;"><button class="btn-back" onclick="prevStep()" style="display:inline-flex;">← Back</button></div>
+      </div>
+
+      <div class="thankyou" id="thankyou">
+        <span class="thankyou-symbol">✦</span>
+        <h2>Your signal is<br/>ready.</h2>
+        <div class="thankyou-divider"></div>
+        <p>Your email app should open with the full brief. Send it to AURAI, and we'll read it carefully.</p>
+        <p style="margin-top: 22px; font-size: 12px; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(49,45,58,0.34);">AURAI LAB · Technology with a Soul</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  const TOTAL_STEPS = 10;
+  let currentStep = 0;
+  const selections = {};
+
+  const cursor = document.getElementById('cursor');
+  const cursorRing = document.getElementById('cursorRing');
+
+  if (cursor && cursorRing && window.matchMedia('(pointer: fine)').matches) {
+    let mx = 0, my = 0, rx = 0, ry = 0;
+    document.addEventListener('mousemove', e => {
+      mx = e.clientX; my = e.clientY;
+      cursor.style.left = mx + 'px';
+      cursor.style.top = my + 'px';
+    });
+
+    (function animRing() {
+      rx += (mx - rx) * 0.12;
+      ry += (my - ry) * 0.12;
+      cursorRing.style.left = rx + 'px';
+      cursorRing.style.top = ry + 'px';
+      requestAnimationFrame(animRing);
+    })();
+
+    document.querySelectorAll('button, .option, textarea, input').forEach(el => {
+      el.addEventListener('mouseenter', () => {
+        cursor.style.width = '11px';
+        cursor.style.height = '11px';
+        cursorRing.style.width = '48px';
+        cursorRing.style.height = '48px';
+      });
+      el.addEventListener('mouseleave', () => {
+        cursor.style.width = '7px';
+        cursor.style.height = '7px';
+        cursorRing.style.width = '30px';
+        cursorRing.style.height = '30px';
+      });
+    });
+  }
+
+  function updateProgress() {
+    const bar = document.getElementById('progressBar');
+    const counter = document.getElementById('stepCounter');
+    if (currentStep === 0) {
+      bar.style.width = '0%';
+      counter.textContent = '';
+    } else {
+      bar.style.width = (currentStep / TOTAL_STEPS * 100) + '%';
+      counter.textContent = currentStep + ' / ' + TOTAL_STEPS;
+    }
+  }
+
+  function startJourney() {
+    document.getElementById('intro').style.display = 'none';
+    currentStep = 1;
+    showStep(1);
+    updateProgress();
+  }
+
+  function showStep(n) {
+    document.querySelectorAll('.step').forEach(s => s.classList.remove('active'));
+    const el = document.getElementById('step-' + n);
+    if (el) {
+      el.classList.add('active');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  }
+
+  function nextStep(from) {
+    if (from < TOTAL_STEPS) {
+      currentStep = from + 1;
+      showStep(currentStep);
+      updateProgress();
+    }
+  }
+
+  function prevStep() {
+    if (currentStep > 1) {
+      currentStep--;
+      showStep(currentStep);
+      updateProgress();
+    } else if (currentStep === 1) {
+      document.querySelectorAll('.step').forEach(s => s.classList.remove('active'));
+      document.getElementById('intro').style.display = '';
+      currentStep = 0;
+      updateProgress();
+    }
+  }
+
+  function selectOption(el, stepNum) {
+    const allInStep = el.closest('.options').querySelectorAll('.option');
+    allInStep.forEach(o => o.classList.remove('selected'));
+    el.classList.add('selected');
+    selections['step' + stepNum] = el.querySelector('.option-label').textContent;
+    setTimeout(() => nextStep(stepNum), 320);
+  }
+
+  function getBriefData() {
+    return {
+      selectedService: window.AURAI_SELECTED_SERVICE || '',
+      selectedProject: window.AURAI_SELECTED_PROJECT || '',
+      project: window.AURAI_SELECTED_PROJECT || selections.step1 || '',
+      name: document.getElementById('clientName')?.value || '',
+      company: document.getElementById('companyName')?.value || '',
+      clientType: selections.step3 || '',
+      industry: selections.step4 || '',
+      vision: document.getElementById('vision')?.value || '',
+      style: selections.step6 || '',
+      challenge: selections.step7 || '',
+      timeline: selections.step8 || '',
+      investment: selections.step9 || '',
+      oneThing: document.getElementById('oneThing')?.value || '',
+      contact: document.getElementById('contactInfo')?.value || '',
+    };
+  }
+
+  
+function formatBrief() {
+    const data = getBriefData();
+
+    return `Hello AURAI,\n\n${data.selectedService ? `I selected this service: ${data.selectedService}.\n` : ''}${data.selectedProject ? `Project type selected: ${data.selectedProject}.\n\n` : ''}My name is ${data.name || '—'}.
+
+${data.company ? `I'm building ${data.company}.` : ''}
+
+I'm a ${data.clientType || '—'} working in ${data.industry || '—'}.
+
+I'd like your help creating ${data.project || 'something meaningful'}.
+
+The direction I'm drawn to is ${data.style || 'still exploring'}.
+
+Right now the biggest challenge is ${data.challenge || '—'}.
+
+If everything goes well, I'd love to have this live ${data.timeline || 'soon'}.
+
+My vision:
+
+${data.vision || '—'}
+
+The one thing I'd most like AURAI to solve is:
+
+"${data.oneThing || '—'}"
+
+You can reach me at:
+
+${data.contact || '—'}
+
+Looking forward to hearing from you.
+
+✦
+
+${data.name || ''}
+${data.company || ''}`;
+}
+
+
+  function showSendChoices() {
+    const choices = document.getElementById('sendChoices');
+    if (choices) choices.style.display = 'grid';
+    const data = getBriefData();
+    console.log('AURAI First Signal:', data);
+  }
+
+  function completeSend() {
+    document.querySelectorAll('.step').forEach(s => s.classList.remove('active'));
+    document.getElementById('progressBar').style.width = '100%';
+    document.getElementById('stepCounter').textContent = '';
+    document.getElementById('thankyou').classList.add('active');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+  function sendByEmail() {
+    const subject = encodeURIComponent('✦ AURAI First Signal · New Project Brief');
+    const body = encodeURIComponent(formatBrief());
+    const to = 'aurailab.studio@gmail.com';
+    window.location.href = `mailto:${to}?subject=${subject}&body=${body}`;
+    setTimeout(completeSend, 600);
+  }
+  function sendByTelegram() {
+    const text = formatBrief();
+    try {
+      navigator.clipboard.writeText(text);
+      alert('Brief copied ✦ Telegram chat with @Sofiya_aurai will open now. Paste and send it there.');
+    } catch (err) {
+      prompt('Copy your brief, then send it to @Sofiya_aurai:', text);
+    }
+    window.open('https://t.me/Sofiya_aurai', '_blank');
+    setTimeout(completeSend, 700);
+  }
+
+  async function copyBrief() {
+    const text = formatBrief();
+    try {
+      await navigator.clipboard.writeText(text);
+      alert('Brief copied ✦');
+    } catch (err) {
+      prompt('Copy your brief:', text);
+    }
+  }
+</script>
+
+
+<script data-inline-from="AURAI_V22_BEGIN_FIX">
+(function(){
+  function bootBegin(){
+    var btn = document.getElementById('startBtn');
+    if(!btn) return;
+    btn.type = 'button';
+    btn.style.pointerEvents = 'auto';
+    btn.onclick = function(event){
+      if(event) {
+        event.preventDefault();
+        event.stopPropagation();
+      }
+      if(typeof startJourney === 'function'){
+        startJourney();
+      } else {
+        var intro = document.getElementById('intro');
+        var step = document.getElementById('step-1');
+        if(intro) intro.style.display = 'none';
+        document.querySelectorAll('.step').forEach(function(s){ s.classList.remove('active'); });
+        if(step) step.classList.add('active');
+        var bar = document.getElementById('progressBar');
+        if(bar) bar.style.width = '10%';
+        var counter = document.getElementById('stepCounter');
+        if(counter) counter.textContent = '1 / 10';
+      }
+      return false;
+    };
+  }
+  if(document.readyState === 'loading'){
+    document.addEventListener('DOMContentLoaded', bootBegin);
+  } else {
+    bootBegin();
+  }
+})();
+</script>
+
+
+
+<script data-inline-from="AURAI_V24_SERVICE_PROJECT_PARAM_JS">
+(function(){
+  function setProgress(stepNumber){
+    var bar = document.getElementById('progressBar');
+    if(bar) bar.style.width = (stepNumber / 10 * 100) + '%';
+    var counter = document.getElementById('stepCounter');
+    if(counter) counter.textContent = stepNumber + ' / 10';
+  }
+
+  function selectProjectOption(project){
+    if(!project) return;
+    window.AURAI_SELECTED_PROJECT = project;
+    if(window.selections) window.selections.step1 = project;
+
+    document.querySelectorAll('#step-1 .option').forEach(function(option){
+      var label = option.querySelector('.option-label');
+      if(label && label.textContent.trim().toLowerCase() === project.trim().toLowerCase()){
+        option.classList.add('selected');
+      }
+    });
+  }
+
+  function updateNotes(service, project){
+    var serviceNote = document.getElementById('selectedServiceNote');
+    if(serviceNote && service){
+      serviceNote.textContent = 'Selected service: ' + service;
+      serviceNote.style.display = 'block';
+    }
+    var projectNote = document.getElementById('selectedProjectNote');
+    if(projectNote && project){
+      projectNote.textContent = 'Project type: ' + project + ' · first question skipped';
+      projectNote.style.display = 'block';
+    }
+  }
+
+  function skipProjectIfNeeded(){
+    if(!window.AURAI_SELECTED_PROJECT) return false;
+
+    var intro = document.getElementById('intro');
+    if(intro) intro.style.display = 'none';
+
+    document.querySelectorAll('.step').forEach(function(s){ s.classList.remove('active'); });
+
+    var stepTwo = document.getElementById('step-2');
+    if(stepTwo) stepTwo.classList.add('active');
+
+    window.currentStep = 2;
+    setProgress(2);
+    window.scrollTo({top:0, behavior:'smooth'});
+    return true;
+  }
+
+  function patchBegin(){
+    var btn = document.getElementById('startBtn');
+    if(!btn) return;
+
+    btn.type = 'button';
+    btn.onclick = function(event){
+      if(event){
+        event.preventDefault();
+        event.stopPropagation();
+      }
+      if(window.AURAI_SELECTED_PROJECT){
+        skipProjectIfNeeded();
+        return false;
+      }
+      if(typeof startJourney === 'function'){
+        startJourney();
+      }
+      return false;
+    };
+  }
+
+  function readParams(){
+    var params = new URLSearchParams(window.location.search);
+    var service = params.get('service') || '';
+    var project = params.get('project') || '';
+
+    window.AURAI_SELECTED_SERVICE = service;
+    window.AURAI_SELECTED_PROJECT = project;
+
+    selectProjectOption(project);
+    updateNotes(service, project);
+    patchBegin();
+  }
+
+  if(document.readyState === 'loading'){
+    document.addEventListener('DOMContentLoaded', readParams);
+  } else {
+    readParams();
+  }
+})();
+</script>
+
+</body>
+</html>
